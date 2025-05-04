@@ -2,18 +2,18 @@
 @AbapCatalog.sqlViewName: 'ZSQLVIEW1'
 
 //basic view cds entity defination without curly braces
-/* define view zsample_view1 
+define view zsample_view1 
     as select 
     key vbeln as so,
     kunnr as cust
-    from vbak; */
+    from vbak; 
     
 // basic cds view this time using curly braces    
-/* define view zsample_view1 as
+define view zsample_view1 as
     select from vbak {
         key vbeln as so,
         kunnr as cust
-    }; */
+    };
     
     
 //in this case we added a name list to instead of so and cust sales_order and customer will appear    
