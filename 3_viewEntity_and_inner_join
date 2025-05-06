@@ -1,0 +1,19 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'entity with inner join '
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+define view entity zcds_entity2_u41 as select from vbak as a
+inner join vbap as b on a.vbeln = b.vbeln
+{
+    key a.vbeln as sales_order,
+    a.kunnr as customer,
+    a.vkorg as sales_org,
+    b.matnr as material_number,
+    b.matkl as material_group
+}
+where a.vbeln = '0000000006';
