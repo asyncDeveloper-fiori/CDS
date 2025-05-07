@@ -1,0 +1,16 @@
+*&---------------------------------------------------------------------*
+*& Report zconsume_cds_entity3_u41
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zconsume_cds_entity3_u41.
+
+select from zcds_entity3_u41( p_vbeln = '0000000006' ) FIELDS * INTO @Data(it_tab).
+ENDSELECT.
+
+if sy-subrc eq 0.
+    CL_dEMO_OUTPUT=>DISPLAY( it_tab ).
+ENDIF.
+
+we need to give the value else it will show error if there are more than one paramteres nthey can be provided using commas 
+like ( p_vbeln = '0000000008' , p_date = '20251111') 
