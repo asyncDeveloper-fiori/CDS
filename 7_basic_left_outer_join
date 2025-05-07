@@ -1,0 +1,16 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'left outer join using cds'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+define view entity zcds_entity4_u41 as select from vbak as head left outer join
+    vbap as item on head.vbeln = item.vbeln
+{
+     key head.vbeln as sales_order,
+     head.kunnr as customer,
+     item.matnr as material_number
+}
