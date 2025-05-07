@@ -1,0 +1,28 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'parameterized cds views'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+define view entity zcds_entity3_u41
+    with parameters p_vbeln : vbeln_va , 
+    @Environment.systemField: #SYSTEM_DATE
+    p_date : abap.dats
+ as select from 
+vbak as a inner join vbap as b on a.vbeln = b.vbeln
+{
+    a.vbeln as sales_order,
+    a.vkorg as sales_organization,
+    b.matnr as material_number,
+    b.matkl as material_group,
+    0.1 as num_literal,
+    $parameters.p_date as syst_date
+}
+where a.vbeln  = $parameters.p_vbeln;
+
+
+/* 0.1 is called number literal @Environment annotation is used to give deafult value and on;y system fields can be used to give default value
+without default value the paramtere stays mandatory else it becomes optional */
