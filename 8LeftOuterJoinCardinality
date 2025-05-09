@@ -1,0 +1,32 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'left outer join with cardinality'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+/* define view entity zcds_entity5_u41 as select from
+vbak as head left outer to one join vbap as item 
+ on head.vbeln = item.vbeln
+{
+    key head.vbeln as salesOrder,
+    head.kunnr as customer,
+    item.matnr as materialNumber
+} */
+
+// join will only form when we include the fields of right table also 
+// if we only fetch data from left table then no join is formed in database
+
+
+define view entity zcds_entity5_u41 as select from
+vbak as head left outer to many join vbap as item 
+ on head.vbeln = item.vbeln
+{
+    key head.vbeln as salesOrder,
+    head.kunnr as customer,
+    item.matnr as materialNumber 
+    
+   // count(*) as noOfRows
+}
