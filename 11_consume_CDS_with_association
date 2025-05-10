@@ -1,0 +1,27 @@
+*&---------------------------------------------------------------------*
+*& Report zconsume_cds6_u41
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT zconsume_cds6_u41.
+
+"consume cds view entity without association
+
+" select from zcds_entity6_u41 FIELDS salesOrder , customer into table @Data(it_tab).
+
+"if sy-subrc is INITIAL.
+"    cl_Demo_output=>display( it_tab ).
+"ENDIF.
+
+"consume cds view with adhoc association
+
+"select from zcds_entity6_u41 FIELDS salesOrder , customer , materialNumber into table @Data(it_tab_adhoc).
+"if sy-subrc is INITIAL.
+"    cl_demo_output=>display( it_tab_adhoc ).
+"ENDIF.
+
+"consume cds view with expose association
+select from zcds_Entity6_u41 FIELDS salesOrder , \_item-matnr , \_item-posnr into table @Data(it_tab_expose).
+if sy-subrc is INITIAL.
+    cl_Demo_output=>display( it_tab_expose ).
+ENDIF.
