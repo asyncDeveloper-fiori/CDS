@@ -1,0 +1,29 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'association basic user41'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+
+// expose association where association name is directly defined in fieldlist and all fields can be accessed
+ define view entity zcds_entity6_u41 as select from vbak 
+association[1..*] to vbap as _item
+on vbak.vbeln = _item.vbeln
+{
+    key vbeln as salesOrder,
+    kunnr as customer,
+    _item 
+} 
+
+//adhoc association here we define the required fields here only
+/* define view entity zcds_entity6_u41 as select from vbak 
+association[1..*] to vbap as _item
+on vbak.vbeln = _item.vbeln
+{
+    key vbeln as salesOrder,
+    kunnr as customer,
+    _item.matnr as materialNumber
+} */
