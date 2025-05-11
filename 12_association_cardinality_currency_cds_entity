@@ -1,0 +1,18 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'association and carnality'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+define view entity zcds_entity7_u41 as select from vbak 
+association[1..1] to vbap as _item on vbak.vbeln = _item.vbeln
+{
+    vbeln as salesOrder,
+    kunnr as customer,
+    _item.waerk as waerk,
+    @Semantics.amount.currencyCode : 'waerk'
+    _item.netwr as netWorth
+}
