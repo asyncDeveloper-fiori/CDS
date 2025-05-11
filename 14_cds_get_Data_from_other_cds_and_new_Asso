@@ -1,0 +1,51 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'cds entity consuming other cds entity'
+@Metadata.ignorePropagatedAnnotations: true
+@ObjectModel.usageType:{
+    serviceQuality: #X,
+    sizeCategory: #S,
+    dataClass: #MIXED
+}
+
+// in this case inner join will be formed as we access data from the association
+/* define view entity zcds_entity8_u41 as select from zcds_entity6_u41._item
+{
+    vbeln,
+    posnr,
+    matnr
+} */
+
+//association again with the association from previous cds entity
+
+/* define view entity zcds_entity8_u41 as select from zcds_entity6_u41._item
+association[*] to makt as _matdesc on $projection.matnr = _matdesc.matnr
+{
+    vbeln,
+    posnr,
+    matnr,
+    _matdesc.maktx
+} */
+
+//inplace of $projection we can also use
+
+/* define view entity zcds_entity8_u41 as select from zcds_entity6_u41._item as item
+association[*] to makt as _matdesc on item.matnr = _matdesc.matnr
+{
+    vbeln,
+    posnr,
+    matnr,
+    _matdesc.maktx
+} */
+
+
+// we can also use conditions
+
+define view entity zcds_entity8_u41 as select from zcds_entity6_u41._item
+association[*] to makt as _matdesc on $projection.matnr = _matdesc.matnr
+{
+    vbeln,
+    posnr,
+    matnr,
+    _matdesc[spras = 'J'].maktx
+}
